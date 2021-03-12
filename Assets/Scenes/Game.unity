@@ -412,6 +412,7 @@ GameObject:
   - component: {fileID: 1629643218}
   - component: {fileID: 1629643216}
   - component: {fileID: 1629643215}
+  - component: {fileID: 1629643217}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -435,6 +436,19 @@ Behaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1629643214}
   m_Enabled: 1
+--- !u!114 &1629643217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1629643214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6be1a09c7fc7f4347b8a91731b987ad4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speedOfRot: 2
 --- !u!20 &1629643218
 Camera:
   m_ObjectHideFlags: 0
@@ -485,13 +499,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1629643214}
-  m_LocalRotation: {x: 0.18689151, y: -0.10287701, z: 0.0012971942, w: 0.9769781}
+  m_LocalRotation: {x: 0.28529215, y: -0.09837477, z: 0.0124932695, w: 0.9532968}
   m_LocalPosition: {x: 1.487, y: 5.58, z: 8.64}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 21.435001, y: -12.441001, z: -2.2110002}
+  m_LocalEulerAnglesHint: {x: 33.12, y: -12.441001, z: -2.2110002}
 --- !u!4 &44792674319400725
 Transform:
   m_ObjectHideFlags: 0
@@ -1335,6 +1349,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2099099588117619227}
+  - component: {fileID: 1615296211732609189}
   - component: {fileID: 5458735623283587169}
   - component: {fileID: 1615296211732609188}
   - component: {fileID: 1615296211732609186}
@@ -1397,6 +1412,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1615296211732609189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615296211732609185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfc89a2523acdbb4cae649d8ae83840b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!137 &1668743695736302358
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
