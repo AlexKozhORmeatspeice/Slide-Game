@@ -5,10 +5,17 @@ using UnityEngine.AI;
 
 public class Character : MonoBehaviour
 {
+    [SerializeField] private float _speed = 3.0f;
+    public float Speed => _speed;
+
+    [SerializeField] private float damage = 1.0f;
+
+    public float Damage => damage;
+    
     private Animator _animator;
     
     private List<Vector3> _movePoints = new List<Vector3>();
-    [SerializeField] private float _speed = 3.0f;
+    
     private NavMeshAgent _agent;
 
     private bool finishedPlot = true;
@@ -17,8 +24,6 @@ public class Character : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        
-        
         _animator = GetComponent<Animator>();
         foreach (GameObject mp in GameObject.FindGameObjectsWithTag("MovePoint"))
         {
