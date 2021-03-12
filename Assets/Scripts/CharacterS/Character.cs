@@ -52,8 +52,10 @@ public class Character : MonoBehaviour
         pos.y = 0;
         
         _agent.SetDestination(pos);
+
         if (Vector3.Distance(transform.position, pos) < 3.0f) //checks the passage of the section
         {
+            _agent.Stop();
             _nowPoint++;
             finishedPlot = false;
         }

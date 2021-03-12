@@ -6,7 +6,17 @@ ModelImporter:
   - first:
       74: -203655887218126122
     second: Idle
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Beta_Joints_MAT
+    second: {fileID: 2100000, guid: 631b40bb33c65294c9ccb65de7f04395, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: asdf1_Beta_HighLimbsGeoSG2
+    second: {fileID: 2100000, guid: 6b5c3406cebb9be49bc80e4e1d48742f, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
