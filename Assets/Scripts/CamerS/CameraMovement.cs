@@ -25,7 +25,6 @@ public class CameraMovement : MonoBehaviour
         Quaternion rotation = Quaternion.Euler(0, targAngle, 0);
 
         Vector3 pos = _target.transform.position - (rotation * _offset);
-        pos.y += 1.0f;
         transform.position = Vector3.Lerp(transform.position,pos,Time.deltaTime * _speedOfMove);
         
         transform.LookAt(_target.transform);
