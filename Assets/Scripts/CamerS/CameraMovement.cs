@@ -27,9 +27,8 @@ public class CameraMovement : MonoBehaviour
 
     void Update()
     {
-        if (Time.time - _timeChangedOffset > 5.0f) //return base offset if no changes after x seconds
+        if (Time.time - _timeChangedOffset > 1.5f) //return base offset if no changes after x seconds
         {
-            Debug.Log(1);
             _offset = Vector3.Lerp(_offset, _startOffset, Time.deltaTime * 0.5f);
         }
         

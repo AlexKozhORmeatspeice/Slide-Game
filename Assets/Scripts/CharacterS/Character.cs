@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class Character : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class Character : MonoBehaviour
     private NavMeshAgent _agent;
 
     private bool underPressure = false; //yeah, it's reference to the queen
-    private bool active = false;
+    public bool active = false;
 
     private int _nowPoint = 0;
     
@@ -38,18 +39,27 @@ public class Character : MonoBehaviour
     void Start()
     {
         _agent.speed = _speed;
-        StartCoroutine(PlayPauseBetweenPoints());
+        active = false;
+        ChoseCharAnimation(Animations.idle);
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!active)
+        if (Input.GetMouseButtonDown(0))
         {
-            ChoseCharAnimation(Animations.idle);
-            return;
+            active = true;
         }
+        if(!active) { return; }
+        
         underPressure = CheckFinishStatusOfPoint(_nowPoint);
+        if (_nowPoint == _movePoints.Count - 1 && !underPressure)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        Debug.Log($"Now Point = {_nowPoint}");
         
         ChoseCharAnimation(!underPressure ? Animations.run : Animations.idle);
 
@@ -57,13 +67,25 @@ public class Character : MonoBehaviour
         {
             Run(_movePoints[_nowPoint + 1].transform.position);
         }
+        else
+        {
+            GameObject nowPointObj = _movePoints[_nowPoint];
+            if (nowPointObj.transform.childCount != 0)
+            {
+                Debug.Log((nowPointObj.transform.childCount - 1) / 2);
+                
+                gameObject.transform.LookAt(nowPointObj.transform.GetChild(nowPointObj.transform.childCount - 1).position); // get middle enemy and look at him
+            }
+        }
     }
 
     private void Run(Vector3 pos) 
     {
         _agent.SetDestination(pos);
-        if (Vector3.Distance(transform.position, pos) < 3.0f) //checks the passage of the section
+        pos.y = transform.position.y;
+        if (Vector3.Distance(transform.position, pos) < 2.0f) //checks the passage of the section
         {
+            _agent.ResetPath();
             _nowPoint++;
         }
     }
@@ -74,12 +96,6 @@ public class Character : MonoBehaviour
         if(indexOfPoint >= _movePoints.Count || indexOfPoint < 0) return false;
         
         return _movePoints[indexOfPoint].transform.childCount != 0;
-    }
-    private IEnumerator PlayPauseBetweenPoints()
-    {
-        active = false;
-        yield return new WaitForSeconds(3.0f);
-        active = true;
     }
 
     private void ChoseCharAnimation(Animations animations)
