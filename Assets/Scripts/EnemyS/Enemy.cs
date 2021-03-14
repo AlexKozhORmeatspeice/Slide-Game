@@ -1,14 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private float hp = 20.0f;
-
+    private Animator _animator;
     public float Hp => hp;
-    
-    // Start is called before the first frame update
+
+    void Start()
+    {
+        _animator = GetComponent<Animator>();
+    }
     // Update is called once per frame
     void Update()
     {
@@ -25,8 +29,14 @@ public class Enemy : MonoBehaviour
 
     public void Die()
     {
-        Destroy(gameObject);
+        StartCoroutine(DeathPlay());
     }
 
+    private IEnumerator DeathPlay()
+    {
+        _animator.SetBool("die", true);
+        yield return new WaitForSeconds(2.0f);
+        Destroy(gameObject);
+    }
    
 }

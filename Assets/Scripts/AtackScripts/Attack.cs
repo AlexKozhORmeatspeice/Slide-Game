@@ -13,15 +13,15 @@ public class Attack : MonoBehaviour
     }
     
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
-        if (Input.GetMouseButtonDown(0) && _character.active)
+        if (Input.GetMouseButtonDown(0) && _character.UnderPressure)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                GameObject proj = Instantiate(_projectilePref, Camera.main.transform.position, Quaternion.identity);
+                GameObject proj = Pooler.Instance.SpawnPoolObject("Bullet", Camera.main.transform.position, Quaternion.identity);
                 proj.GetComponent<BulletConrtoller>().Target = hit.point;
             }
         }

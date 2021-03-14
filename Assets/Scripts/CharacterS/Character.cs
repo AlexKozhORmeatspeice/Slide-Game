@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class Character : MonoBehaviour
 {
+    private Vector3 origin;
     [SerializeField] private float _speed = 3.0f;
     public float Speed => _speed;
 
@@ -20,7 +22,10 @@ public class Character : MonoBehaviour
     private NavMeshAgent _agent;
 
     private bool underPressure = false; //yeah, it's reference to the queen
-    public bool active = false;
+
+    public bool UnderPressure => underPressure;
+    
+    private bool active = false;
 
     private int _nowPoint = 0;
     
@@ -47,7 +52,7 @@ public class Character : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if(Input.touchCount > 0 )
         {
             active = true;
         }
@@ -59,7 +64,6 @@ public class Character : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
-        Debug.Log($"Now Point = {_nowPoint}");
         
         ChoseCharAnimation(!underPressure ? Animations.run : Animations.idle);
 
@@ -72,8 +76,6 @@ public class Character : MonoBehaviour
             GameObject nowPointObj = _movePoints[_nowPoint];
             if (nowPointObj.transform.childCount != 0)
             {
-                Debug.Log((nowPointObj.transform.childCount - 1) / 2);
-                
                 gameObject.transform.LookAt(nowPointObj.transform.GetChild(nowPointObj.transform.childCount - 1).position); // get middle enemy and look at him
             }
         }
@@ -89,8 +91,7 @@ public class Character : MonoBehaviour
             _nowPoint++;
         }
     }
-
-
+    
     private bool CheckFinishStatusOfPoint(int indexOfPoint)
     {
         if(indexOfPoint >= _movePoints.Count || indexOfPoint < 0) return false;
@@ -102,5 +103,6 @@ public class Character : MonoBehaviour
     { 
         _animator.SetInteger("state", (int)animations);
     }
-    
+
+
 }
