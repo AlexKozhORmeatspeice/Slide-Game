@@ -3,25 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Attack : MonoBehaviour, IPointerDownHandler
+public class Attack : MonoBehaviour
 {
-    private Vector3 origin;
     
     [SerializeField] private GameObject _projectilePref;
     private Character _character;
 
     void Start()
     {
-        origin = Vector3.zero;
         _character = FindObjectOfType<Character>();
     }
     
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
-        if (origin != Vector3.zero && _character.UnderPressure)
+        if (Input.GetMouseButtonDown(0) && _character.UnderPressure)
         {
-            Ray ray = Camera.main.ScreenPointToRay(origin);
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
@@ -29,13 +27,7 @@ public class Attack : MonoBehaviour, IPointerDownHandler
                 proj.GetComponent<BulletConrtoller>().Target = hit.point;
             }
 
-            origin = Vector3.zero;
         }
-    }
-
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        origin = eventData.position;
     }
 }
 

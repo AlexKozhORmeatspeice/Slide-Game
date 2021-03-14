@@ -28,7 +28,6 @@ public class BulletConrtoller : MonoBehaviour, IPooledObj
     // Update is called once per frame
     void Update()
     {
-
         transform.LookAt(_target);
         transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, Time.deltaTime * _speed);
     }
